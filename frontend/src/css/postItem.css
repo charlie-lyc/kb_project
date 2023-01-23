@@ -1,0 +1,19 @@
+.postTitle {
+    margin: 1rem;
+}
+
+.postTitle:hover {
+    color: #69896f;
+}
+
+.postUsername {
+    margin: 1rem;
+}
+
+.postBody {
+    margin: 1rem;
+}
+
+.articleHr {
+    border: 0.3px solid #d3d3d3;
+}

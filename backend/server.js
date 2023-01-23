@@ -41,25 +41,32 @@ app.use(express.urlencoded({ extended: false })) // for Parsing 'application/x-w
 /////////////////////////////////////////////////////////
 // app.use('/api/users', require('./routers/usersRouter'))
 
+// Health Check for ALB on AWS
+app.get('/api', (req, res) => {
+    res.status(200).send('Welcome to KB Project!')
+})
 
 /***************************************************************/
 /* SERVE FRONTEND */
 const path = require('path')
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/build')))
-    app.get('*', (req, res) => {
+
+    app.get('/*', (req, res) => {
         res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html'))
     })
 } else {
     app.get('/', (req, res) => res.send('Set NODE_ENV to production!'))
 }
-/***************************************************************/
 
+/***************************************************************/
 /** Error Handling **/
 app.use(require('./middleware/errorHandler'))
-/***************************************************************/
 
+/** Start Sever **/
 app.listen(process.env.PORT, () => {
     /* For Development */
     // console.log(`Server started on port ${process.env.PORT}`)
 })
+
+/***************************************************************/

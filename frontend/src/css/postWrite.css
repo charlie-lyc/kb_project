@@ -1,0 +1,8 @@
+.writeForm {
+    margin: 5%;
+}
+
+.writeForm input, 
+.writeForm textarea {
+    width: 100%;
+}

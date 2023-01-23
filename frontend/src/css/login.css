@@ -1,0 +1,33 @@
+.login {
+    margin: 5%;
+}
+
+.loginForm {
+    margin: auto;
+    /* border: solid; */
+    /* border-radius: 10px; */
+    text-align: center;
+    width: 70%;
+    height: 22rem;
+}
+
+.socialLogo {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10px;
+}
+
+.loginBtn span {
+    font-size: 1rem;
+}
+
+.loginBtn {
+    height: 3rem;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+}
