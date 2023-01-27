@@ -1,72 +1,100 @@
+require('colors')
+const passport = require('passport')
 const express = require('express')
-const cors = require('cors')
+// const cors = require('cors')
+const session = require('express-session')
+const path = require('path')
+
+/***************************************************************/
+/** CONFIGURATION **/
+
+// Environmental variable
 require('dotenv').config()
 
+// Passport
+require('./configs/googlePassport')(passport)
+require('./configs/kakaoPassport')(passport)
 
-/** Connect to MongoDB **/
-// const connectDB = require('./config/db')
-// connectDB()
-/**************************************/
+/***************************************************************/
+/** CONNECT TO DATABASE **/
+const db = require('./models')
 
+// Test the database connection
+if (process.env.NODE_ENV === 'development') {
+    db.sequelize.authenticate()
+        .then(() => console.log('DB connection has been established successfully.'.green))
+        .catch(err => console.error(`Unable to connect to the database: ${err}`.red))
+}
+
+//Synchronize models
+db.sequelize.sync({ alter: true }) // { alter: true } or { force: true }
+    .then(() => {
+        console.log('All models were synchronized. All tables have been created if not existed.'.green)  // <<<<<<<<<
+    }).catch(err => {
+        console.error(`Unable to synchronize models: ${err}`.red)  // <<<<<<<<<
+    })
+
+/***************************************************************/
+/** INITIALIZE APPLICATION AND MIDDLEWARE **/
 const app = express()
 
-/**
- * Enable All CORS Request
- */
-app.use(cors())
+// Enable all cors request: using command 'npm run dev'
+// app.use(cors())
 
-/** Use Body-Parser to Get Data from Request Body **/
-app.use(express.json()) // for Parsing 'application/json'
-app.use(express.urlencoded({ extended: false })) // for Parsing 'application/x-www-form-urlencoded'
-/***************************************************/
+// Use body-parser to get from request body
+app.use(express.json()) // 'application/json'
+app.use(express.urlencoded({ extended: false })) // 'application/x-www-form-urlencoded'
 
+// Sessions for login with passport
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        // path: '/', // Default
+        // httpOnly: true, // Default
+        maxAge: 900000,
+        // >>>>>>>>>>>>>> Set HTTPS <<<<<<<<<<<<<<
+        // secure: true,
+        // >>>>>>>>>>>>>> Set HTTPS <<<<<<<<<<<<<<
+    },
+}))
 
-/* Goals */
-// app.get('/api/goals', (req, res) => {
-//     // res.send('Get all goals')
-//     //////////////////////////////////////////////////
-//     // res.status(200).send('Get all goals')
-//     //////////////////////////////////////////////////
-//     res.status(200).json({ message: 'Get all goals' })
-// })
-/////////////////////////////////////////////////////////
-// const goalsRouter = require('./routers/goalsRouter')
-// app.use('/api/goals', goalsRouter)
-/////////////////////////////////////////////////////////
-// app.use('/api/goals', require('./routers/goalsRouter'))
+// Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
-/* Users */
-// const usersRouter = require('./routers/usersRouter')
-// app.use('/api/users', usersRouter)
-/////////////////////////////////////////////////////////
-// app.use('/api/users', require('./routers/usersRouter'))
+/***************************************************************/
+/** SERVE BACKEND **/
 
-// Health Check for ALB on AWS
+// Health check for ELB(ALB) on AWS
 app.get('/api', (req, res) => {
     res.status(200).send('Welcome to KB Project!')
 })
 
-/***************************************************************/
-/* SERVE FRONTEND */
-const path = require('path')
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/build')))
+app.use('/api/auth', require('./routers/authRouter'))
 
-    app.get('/*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html'))
-    })
-} else {
-    app.get('/', (req, res) => res.send('Set NODE_ENV to production!'))
-}
+
+
 
 /***************************************************************/
-/** Error Handling **/
+/** SERVE FRONTEND **/
+app.use(express.static(path.join(__dirname, '../frontend/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html'))
+})
+
+/***************************************************************/
+// Error handling
 app.use(require('./middleware/errorHandler'))
 
-/** Start Sever **/
-app.listen(process.env.PORT, () => {
-    /* For Development */
-    // console.log(`Server started on port ${process.env.PORT}`)
-})
+// Start server
+if (process.env.NODE_ENV === 'development') {
+    app.listen(process.env.PORT, () => {
+        console.log(`Server is running on port ${process.env.PORT}.`.green) // <<<<<<<<<
+    })
+} else {
+    app.listen(process.env.PORT)
+}
 
 /***************************************************************/

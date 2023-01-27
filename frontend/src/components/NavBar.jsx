@@ -1,20 +1,15 @@
 import '../css/navBar.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 
 const NavBar = ({ isLogged, handleLogout }) => {
     const [isOpened, setOpened] = useState(false)
-    const navigate = useNavigate()
 
-    const toggleDropdown = () => {
-        setOpened(!isOpened)
-    }
-
+    const toggleDropdown = () => setOpened(!isOpened)
     const executeLogout = () => {
-        alert('Request Logout...')
         handleLogout()
-        navigate('/')
+        window.location.href = '/api/auth/logout'
     }
 
     return (
@@ -43,13 +38,9 @@ const NavBar = ({ isLogged, handleLogout }) => {
                     {
                         isLogged
                             ?
-                            <li onClick={executeLogout}>
-                                <Link to='/api/logout'>Logout</Link>
-                            </li>
+                            <li onClick={executeLogout}><span>Logout</span></li>
                             :
-                            <li>
-                                <Link to='/login'>Login</Link>
-                            </li>
+                            <li><Link to='/login'>Login</Link></li>
                     }
                 </ul>
                 <span className='hamburgerMenu' onClick={toggleDropdown}>
@@ -78,13 +69,9 @@ const NavBar = ({ isLogged, handleLogout }) => {
                         {
                             isLogged
                                 ?
-                                <li onClick={executeLogout}>
-                                    <Link to='/api/logout'>Logout</Link>
-                                </li>
+                                <li onClick={executeLogout}><span>Logout</span></li>
                                 :
-                                <li>
-                                    <Link to='/login'>Login</Link>
-                                </li>
+                                <li><Link to='/login'>Login</Link></li>
                         }
                     </ul>
                     {/* <a>&times;</a> */}

@@ -1,5 +1,3 @@
-
-
 module.exports = {
     development: {
         database: process.env.LOCAL_DB_DATABASE,

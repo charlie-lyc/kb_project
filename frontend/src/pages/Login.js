@@ -1,23 +1,12 @@
 import "../css/login.css"
-import { useNavigate } from "react-router-dom"
 import googleLogo from "../assets/googleLogo.png"
 import kakaoLogo from "../assets/kakaoLogo.png"
 
 
-const Login = ({ isLogged, handleLogin }) => {
-    const navigate = useNavigate()
+const Login = ({ isLogged }) => {
 
-    const kakaoLogin = () => {
-        alert('Request Kakao Login...')
-        handleLogin()
-        navigate('/board')
-    }
-
-    const googleLogin = () => {
-        alert('Request Google Login...')
-        handleLogin()
-        navigate('/board')
-    }
+    const kakaoLogin = () => window.location.href = '/api/auth/kakao'
+    const googleLogin = () => window.location.href = '/api/auth/google'
 
     return (
         isLogged ?

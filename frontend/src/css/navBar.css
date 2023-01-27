@@ -9,7 +9,7 @@
     font-size: 1.3rem;
 }
 
-.navBar > span {
+.navBar span {
     margin: 0 auto;
     color: #ffffff;
 }
@@ -35,6 +35,10 @@
 
 .hamburgerMenu {
     display: none;
+}
+
+.hamburgerMenu:hover {
+    cursor: pointer;
 }
 
 /**************************************/
@@ -69,15 +73,19 @@
     padding: 0;
 }
 
-.dropdown a {
+.dropdown a,
+.dropdown span {
     color: #ffffff;
     height: 1rem;
 }
 
 .dropdown a:hover,
-.dropdownMenu a:hover {
+.dropdown span:hover,
+.dropdownMenu a:hover,
+.dropdownMenu span:hover {
     background-color: #ffffff;
     color: #033F0F;
+    cursor: pointer;
 }
 
 .dropdownMenu li {

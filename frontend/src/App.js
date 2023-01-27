@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import MainTitle from './components/MainTitle'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
@@ -19,18 +20,22 @@ const App = () => {
     const [auth, setAuth] = useState({
         isLogged: false,
         isJoined: false,
-        username: 'Jane' // For displaying username or default value
+        username: undefined // For displaying username or default value
     })
     const [posts, setPosts] = useState([])
 
     const { isLogged, isJoined, username } = auth
 
-    const handleLogin = () => {
-        setAuth(prevState => ({ ...prevState, isLogged: true }))
-    }
-
     const handleLogout = () => {
-        setAuth(prevState => ({ ...prevState, isLogged: false }))
+        Cookies.remove('isLogged')
+        Cookies.remove('isJoined')
+        Cookies.remove('username')
+        setAuth((prevState) => ({
+            ...prevState, 
+            isLogged: false,
+            isJoined: false,
+            username: undefined
+        }))
     }
 
     // Effect Hook for Side Effects
@@ -56,6 +61,20 @@ const App = () => {
                 body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
             },
         ])
+
+        // console.log(Cookies.get()) // <<<<<<<<<
+        if (Cookies.get('isLogged') && Cookies.get('isJoined') && Cookies.get('username')) {
+            // console.log(Cookies.get('isLogged')) // <<<<<<<<<
+            // console.log(Cookies.get('isJoined')) // <<<<<<<<<
+            // console.log(Cookies.get('username')) // <<<<<<<<<
+            setAuth((prevState) => ({
+                ...prevState,
+                isLogged: Cookies.get('isLogged') === 'true' ? true : false,
+                isJoined: Cookies.get('isJoined') === 'true' ? true : false,
+                username: Cookies.get('username')
+            }))
+        }
+        
         // componentWillUnmount()
         // return function () {
         //
@@ -67,7 +86,7 @@ const App = () => {
         <>
             <MainTitle />
             <Router>
-                <NavBar isLogged={isLogged} handleLogout={handleLogout} />
+                <NavBar isLogged={isLogged} handleLogout={handleLogout}/>
                 <Routes>
                     <Route path='/' element={<Home username={username} />} />
                     <Route path='/about' element={<About />} />
@@ -76,9 +95,9 @@ const App = () => {
                     <Route path='/postwrite' element={<PostWrite isLogged={isLogged} username={username} />} />
                     <Route path='/postmodify/:postId' element={<PostModify isLogged={isLogged} username={username} />} />
                     <Route path='/clinics' element={<Clinics />} />
-                    <Route path='/survey' element={<Survey isJoined={isJoined} />} />
+                    <Route path='/survey' element={<Survey isLogged={isLogged} isJoined={isJoined} />} />
                     <Route path='/articles' element={<Articles />} />
-                    <Route path='/login' element={<Login isLogged={isLogged} handleLogin={handleLogin} />} />
+                    <Route path='/login' element={<Login isLogged={isLogged} isJoined={isJoined} />} />
                 </Routes>
             </Router>
         </>

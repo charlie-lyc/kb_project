@@ -2,7 +2,7 @@ import '../css/survey.css'
 import { useState } from 'react'
 
 
-const Survey = ({ isJoined }) => {
+const Survey = ({ isLogged, isJoined }) => {
     // const [myname, setMyname] = useState('')
     // const handleMyname = (event) => {
     //     setMyname(event.target.value)
@@ -381,6 +381,12 @@ const Survey = ({ isJoined }) => {
         console.log(cardiorespiratory, cardiorespiratorySymptoms)
         console.log(dermatologicTeguments, dermatologicTegumentsSymptoms)
         console.log(other, otherSymptoms)
+    }
+
+    if (!isLogged) {
+        return (
+            <div className='subTitle'>You need to login.</div>
+        )
     }
 
     return (
