@@ -1,15 +1,24 @@
 import '../css/navBar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import axios from 'axios'
+// import server from '../configs/serverConfig'
 
 
 const NavBar = ({ isLogged, handleLogout }) => {
     const [isOpened, setOpened] = useState(false)
+    const navigate = useNavigate()
 
     const toggleDropdown = () => setOpened(!isOpened)
-    const executeLogout = () => {
-        handleLogout()
-        window.location.href = '/api/auth/logout'
+
+    // console.log(server[process.env.NODE_ENV]) // <<<<<<<<<
+    
+    const executeLogout = async () => {
+        const res = await axios.get(`/api/auth/logout`)
+        if (res.status === 200 && res.data.message === 'OK') {
+            handleLogout()
+            navigate('/')
+        }
     }
 
     return (

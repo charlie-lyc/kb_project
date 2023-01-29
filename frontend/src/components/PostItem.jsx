@@ -11,6 +11,9 @@ const PostItem = ({ post }) => {
             </Link>
             <p className='postUsername'>{post.username}</p>
             <p className='postBody'>{post.body.substring(0, 200) + '...'}</p>
+            <br />
+            <hr className="articleHr" />
+            <br />
         </div>
     )
 }

@@ -1,40 +1,40 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('User', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+        },
         kakaoId: {
             type: DataTypes.BIGINT, // >>>>>> !!! <<<<<<
         },
         googleId: {
             type: DataTypes.STRING, // >>>>>> !!! <<<<<<
         },
-        provider: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: 'local', // ex) 'kakao', 'google'
-        },
         username: {
             type: DataTypes.STRING,
             allowNull: false, // allowNull defaults to true
         },
+        provider: {
+            type: DataTypes.STRING,
+            defaultValue: 'local', // ex) 'kakao', 'google'
+        },
         isJoined: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
+            defaultValue: false
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         createdAt: {
             type: DataTypes.DATE,
-            allowNull: false,
             // defaultValue: DataTypes.NOW,    // Available only when using 'sequelize'
             defaultValue: sequelize.fn('NOW'), // Available when using 'sequelize' or 'SQL'
         },
         updatedAt: {
             type: DataTypes.DATE,
-            allowNull: false,
             defaultValue: sequelize.fn('NOW'),
-        },
-        isAdmin: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
         },
     }, {
         timestamps: true, // Automatically 'createdAt' and 'updatedAt' fields are added to model, using the data type 'DataTypes.DATE'. And these are managed automatically.

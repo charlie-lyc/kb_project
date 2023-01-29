@@ -1,8 +1,20 @@
-.writeForm {
+.postWriteForm {
     margin: 5%;
 }
 
-.writeForm input, 
-.writeForm textarea {
+.postWriteForm input, 
+.postWriteForm textarea {
     width: 100%;
+}
+
+.postWriteForm button {
+    border: none;
+    font-size: 1rem;
+    width: 7rem;
+    height: 2rem;
+    border-radius: 10px;
+}
+
+.postWriteForm button:hover {
+    cursor: pointer;
 }

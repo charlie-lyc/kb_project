@@ -15,3 +15,7 @@
     height: 2rem;
     border-radius: 10px;
 }
+
+.postBtn:hover {
+    cursor: pointer;
+}

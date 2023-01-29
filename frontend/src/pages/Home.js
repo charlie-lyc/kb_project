@@ -2,6 +2,7 @@ import '../css/home.css'
 
 
 const Home = ({ username }) => {
+    
     return (
         <div className='home'>
             <div className='subTitle'>Welcome, {username}!</div>

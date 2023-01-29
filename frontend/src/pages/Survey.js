@@ -1,14 +1,11 @@
 import '../css/survey.css'
 import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+// import server from '../configs/serverConfig'
 
 
-const Survey = ({ isLogged, isJoined }) => {
-    // const [myname, setMyname] = useState('')
-    // const handleMyname = (event) => {
-    //     setMyname(event.target.value)
-    //     // console.log(event.target.value)
-    // }
-
+const Survey = ({ isLogged, isJoined, userId, username, handleJoin }) => {
     const [survey, setSurvey] = useState({
         // Basic
         gender: '',
@@ -60,7 +57,7 @@ const Survey = ({ isLogged, isJoined }) => {
             hairLoss: false,
         },
         other: false,
-        othersSymptoms: {
+        otherSymptoms: {
             lossOfAppetite: false,
             alteredSmell: false,
             bodyWeightChanges: false,
@@ -78,6 +75,7 @@ const Survey = ({ isLogged, isJoined }) => {
             speechDisturbances: false,
         },
     })
+    const navigate = useNavigate()
 
     const { gender, age, vaccination, test, testResult, whenPositive, longCovid, whenLongCovid, lastingLongCovid } = survey
     const { neuropsychiatric, neuropsychiatricSymptoms, gastrointestinal, gastrointestinalSymptoms, cardiorespiratory, cardiorespiratorySymptoms, dermatologicTeguments, dermatologicTegumentsSymptoms, other, otherSymptoms } = survey
@@ -149,7 +147,7 @@ const Survey = ({ isLogged, isJoined }) => {
                 hairLoss: false,
             },
             other: false,
-            othersSymptoms: {
+            otherSymptoms: {
                 lossOfAppetite: false,
                 alteredSmell: false,
                 bodyWeightChanges: false,
@@ -298,7 +296,7 @@ const Survey = ({ isLogged, isJoined }) => {
     }
 
     // Data Validation and Form Submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (gender === '' || age === '' || vaccination === '') {
             alert('Please fill the Gender, Age and Vaccination items.')
@@ -375,12 +373,94 @@ const Survey = ({ isLogged, isJoined }) => {
                 return
             }
         }
-        console.log(gender, age, vaccination, test, testResult, whenPositive, longCovid, whenLongCovid, lastingLongCovid)
-        console.log(neuropsychiatric, neuropsychiatricSymptoms)
-        console.log(gastrointestinal, gastrointestinalSymptoms)
-        console.log(cardiorespiratory, cardiorespiratorySymptoms)
-        console.log(dermatologicTeguments, dermatologicTegumentsSymptoms)
-        console.log(other, otherSymptoms)
+        // console.log(gender, age, vaccination, test, testResult, whenPositive, longCovid, whenLongCovid, lastingLongCovid)
+        // console.log(neuropsychiatric, neuropsychiatricSymptoms)
+        // console.log(gastrointestinal, gastrointestinalSymptoms)
+        // console.log(cardiorespiratory, cardiorespiratorySymptoms)
+        // console.log(dermatologicTeguments, dermatologicTegumentsSymptoms)
+        // console.log(other, otherSymptoms)
+
+        // console.log(server[process.env.NODE_ENV]) // <<<<<<<<<
+        const newSurvey = {
+            /* Basic */
+            gender, // gender: ''
+            age, // age: ''
+            vaccination, // vaccination: ''
+            /* Test */
+            test, // test: false
+            testResult, // testResult: ''
+            whenPositive, // whenPositive: ''
+            /* Long Covid */
+            longCovid, // longCovid: false
+            whenLongCovid, // whenLongCovid: '',
+            lastingLongCovid, // lastingLongCovid: '',
+            /* Neuropsychiatric Symptoms */
+            neuropsychiatric, // neuropsychiatric: false,
+            mood: neuropsychiatricSymptoms.mood, // mood: false,
+            fatigue: neuropsychiatricSymptoms.fatigue, // fatigue: false,
+            sleepDisorder: neuropsychiatricSymptoms.sleepDisorder, // sleepDisorder: false,
+            headache: neuropsychiatricSymptoms.headache, // headache: false,
+            cognition: neuropsychiatricSymptoms.cognition, // cognition: false,
+            dizziness: neuropsychiatricSymptoms.dizziness, // dizziness: false,
+            neurologicalAbnormalities: neuropsychiatricSymptoms.neurologicalAbnormalities, // neurologicalAbnormalities: false,
+            balanceProblems: neuropsychiatricSymptoms.balanceProblems, // balanceProblems: false,
+            /* Gastrointestinal Symptoms */
+            gastrointestinal, // gastrointestinal: false,
+            abdominalPain: gastrointestinalSymptoms.abdominalPain, // abdominalPain: false,
+            constipation: gastrointestinalSymptoms.constipation, // constipation: false,
+            diarrhea: gastrointestinalSymptoms.diarrhea, // diarrhea: false,
+            vomitingNausea: gastrointestinalSymptoms.vomitingNausea, // vomitingNausea: false,
+            /* Cardiorespiratory Symptoms */
+            cardiorespiratory, // cardiorespiratory: false,
+            respiratorySymptoms: cardiorespiratorySymptoms.respiratorySymptoms, // respiratorySymptoms: false,
+            sputumNasalCogestion: cardiorespiratorySymptoms.sputumNasalCogestion, // sputumNasalCogestion: false,
+            orthostaticIntolerance: cardiorespiratorySymptoms.orthostaticIntolerance, // orthostaticIntolerance: false,
+            exerciseIntolerance: cardiorespiratorySymptoms.exerciseIntolerance, // exerciseIntolerance: false,
+            chestPain: cardiorespiratorySymptoms.chestPain, // chestPain: false,
+            rhinorrhea: cardiorespiratorySymptoms.rhinorrhea, // rhinorrhea: false,
+            cough: cardiorespiratorySymptoms.cough, // cough: false,
+            soreThroat: cardiorespiratorySymptoms.soreThroat, // soreThroat: false,
+            chestTightness: cardiorespiratorySymptoms.chestTightness, // chestTightness: false,
+            variationInHeartRate: cardiorespiratorySymptoms.variationInHeartRate, // variationInHeartRate: false,
+            palpitations: cardiorespiratorySymptoms.palpitations, // palpitations: false,
+            /* Dermatologic Teguments Symptoms */
+            dermatologicTeguments, // dermatologicTeguments: false,
+            hyperhidrosis: dermatologicTegumentsSymptoms.hyperhidrosis, // hyperhidrosis: false,
+            dermatologic: dermatologicTegumentsSymptoms.dermatologic, // dermatologic: false,
+            hairLoss: dermatologicTegumentsSymptoms.hairLoss, // hairLoss: false,
+            /* Other Symptoms */
+            other, // other: false,
+            lossOfAppetite: otherSymptoms.lossOfAppetite, // lossOfAppetite: false,
+            alteredSmell: otherSymptoms.alteredSmell, // alteredSmell: false,
+            bodyWeightChanges: otherSymptoms.bodyWeightChanges, // bodyWeightChanges: false,
+            myalgiaArthralgia: otherSymptoms.myalgiaArthralgia, // myalgiaArthralgia: false,
+            alteredTaste: otherSymptoms.alteredTaste, // alteredTaste: false,
+            otalgia: otherSymptoms.otalgia, // otalgia: false,
+            ophthalmologic: otherSymptoms.ophthalmologic, // ophthalmologic: false,
+            swollenLymphNodes: otherSymptoms.swollenLymphNodes, // swollenLymphNodes: false,
+            dysphonia: otherSymptoms.dysphonia, // dysphonia: false,
+            fever: otherSymptoms.fever, // fever: false,
+            musculoskeletalOther: otherSymptoms.musculoskeletalOther, // musculoskeletalOther: false,
+            changesInMenstruation: otherSymptoms.changesInMenstruation, // changesInMenstruation: false,
+            urinarySymptoms: otherSymptoms.urinarySymptoms, // urinarySymptoms: false,
+            dysphagia: otherSymptoms.dysphagia, // dysphagia: false,
+            speechDisturbances: otherSymptoms.speechDisturbances, // speechDisturbances: false,
+        }
+
+        const res = await axios.post(`/api/survey`, newSurvey )
+        // console.log(res.data) // <<<<<<<<<
+        if (res.data.surveyId) {
+            handleJoin(true)
+            navigate('/survey')
+        }
+    }
+
+    const handleDelete = async () => {
+        const res = await axios.delete(`/api/survey`)
+        if (res.status === 200 && res.data.message === 'OK') {
+            handleJoin(false)
+            navigate('/survey')
+        }
     }
 
     if (!isLogged) {
@@ -390,15 +470,21 @@ const Survey = ({ isLogged, isJoined }) => {
     }
 
     return (
-        isJoined ?
-            <div className='subTitle'>You have submitted the survey. Thank you!</div>
+        isJoined 
+            ?
+            <div style={{ margin: '5%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <div className='subTitle'>You have submitted the survey. Thank you!</div>
+                <br />
+                <div>
+                    If you want to rewrite this form, please
+                    <button style={{ color: 'red', border: 'none', background: 'none', textDecoration: 'underline' }} onClick={handleDelete}>delete</button>
+                    and submit again.
+                </div>
+            </div>
             :
             <div className='survey'>
-                {/* <input type="text"/> */}
-                {/* <input type="text" value={myname}/> */}
-                {/* <input type="text" value={myname} onChange={handleMyname}/> */}
-
                 <div className='subTitle'>Please submit this survey.</div>
+                User Name: { username }
                 <form className='surveyForm'>
                     <span><b>1. Gender</b></span>
                     <br />
@@ -476,7 +562,7 @@ const Survey = ({ isLogged, isJoined }) => {
                                 <option value="12">3 months ago</option>
                                 <option value="16">more than 4 months ago</option>
                             </select>
-                            <br />
+                            <br /><br />
                             <select name='lastingLongCovid' onChange={handleChange}>
                                 <option value="">--- Lasting period (approximately) ---</option>
                                 <option value="2">2 weeks</option>
@@ -587,9 +673,8 @@ const Survey = ({ isLogged, isJoined }) => {
                             }
                         </>
                     }
-
-                    <br />
-                    <button onClick={handleSubmit}>Submit</button>
+                    <br /><br />
+                    <button style={{ color: 'blue' }} onClick={handleSubmit}>Submit</button>
                 </form>
             </div>
     )

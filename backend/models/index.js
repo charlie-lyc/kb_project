@@ -13,18 +13,18 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
 
 const db = {}
 db.sequelize = sequelize
+
 db.User = require('./userModel')(sequelize, DataTypes)
 // console.log(db.User === sequelize.models.User) // true <<<<<<<<<
+db.Post = require('./postModel')(sequelize, DataTypes)
+// console.log(db.Post === sequelize.models.Post) // true <<<<<<<<<
+db.Survey = require('./surveyModel')(sequelize, DataTypes)
+// console.log(db.Survey === sequelize.models.Survey) // true <<<<<<<<<
 
-// db.Notice = require('./noticeModel')(sequelize, DataTypes)
-// console.log(db.Notice === sequelize.models.Notice) // true
-// db.Request = require('./requestModel')(sequelize, DataTypes)
-// console.log(db.Request === sequelize.models.Request) // true
+db.User.hasMany(db.Post, { foreignKey: { allowNull: false } })
+db.Post.belongsTo(db.User)
+db.User.hasOne(db.Survey, { foreignKey: { allowNull: false } })
+db.Survey.belongsTo(db.User)
 
-
-// db.User.hasMany(db.Notice, { foreignKey: { allowNull: false } })
-// db.Notice.belongsTo(db.User)
-// db.User.hasMany(db.Request, { foreignKey: { allowNull: false } })
-// db.Request.belongsTo(db.User)
 
 module.exports = db

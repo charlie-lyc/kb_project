@@ -1,7 +1,7 @@
 require('colors')
 const passport = require('passport')
 const express = require('express')
-// const cors = require('cors')
+const cors = require('cors')
 const session = require('express-session')
 const path = require('path')
 
@@ -22,8 +22,8 @@ const db = require('./models')
 // Test the database connection
 if (process.env.NODE_ENV === 'development') {
     db.sequelize.authenticate()
-        .then(() => console.log('DB connection has been established successfully.'.green))
-        .catch(err => console.error(`Unable to connect to the database: ${err}`.red))
+        .then(() => console.log('DB connection has been established successfully.'.blue))
+        .catch(err => console.error(`Unable to connect to the database: ${err}`.orange))
 }
 
 //Synchronize models
@@ -38,8 +38,8 @@ db.sequelize.sync({ alter: true }) // { alter: true } or { force: true }
 /** INITIALIZE APPLICATION AND MIDDLEWARE **/
 const app = express()
 
-// Enable all cors request: using command 'npm run dev'
-// app.use(cors())
+// Enable all cors request
+app.use(cors())
 
 // Use body-parser to get from request body
 app.use(express.json()) // 'application/json'
@@ -51,11 +51,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        // path: '/', // Default
-        // httpOnly: true, // Default
-        maxAge: 900000,
+        // path: '/',             // Default
+        // httpOnly: true,        // Default
+        maxAge: 60 * 60000,    // 60 minute
         // >>>>>>>>>>>>>> Set HTTPS <<<<<<<<<<<<<<
-        // secure: true,
+        // sameSite: 'None',      // Allow crose-site request(Need secure), default to 'Lax', 
+        // secure: true,          // Default to false
         // >>>>>>>>>>>>>> Set HTTPS <<<<<<<<<<<<<<
     },
 }))
@@ -72,10 +73,10 @@ app.get('/api', (req, res) => {
     res.status(200).send('Welcome to KB Project!')
 })
 
+// Routers and controllers
 app.use('/api/auth', require('./routers/authRouter'))
-
-
-
+app.use('/api/post', require('./routers/postRouter'))
+app.use('/api/survey', require('./routers/surveyRouter'))
 
 /***************************************************************/
 /** SERVE FRONTEND **/

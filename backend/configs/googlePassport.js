@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const { User } = require('../models')
+const hostConfig = require('./hostConfig')[process.env.NODE_ENV]
 
 
 module.exports = asyncHandler(async (passport) => {
@@ -8,7 +9,7 @@ module.exports = asyncHandler(async (passport) => {
         new GoogleStrategy({
             clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
             clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-            callbackURL: "/api/auth/google/callback"
+            callbackURL: `${hostConfig.server}/api/auth/google/callback`
         },
         async (accessToken, refreshToken, profile, cb) => {
             // console.log(profile) // <<<<<<<<<

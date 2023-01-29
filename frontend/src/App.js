@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Cookies from 'js-cookie'
+import axios from 'axios'
 import MainTitle from './components/MainTitle'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
@@ -16,69 +16,45 @@ import PostModify from './pages/PostModify'
 
 
 const App = () => {
-    // State Hook
     const [auth, setAuth] = useState({
         isLogged: false,
         isJoined: false,
-        username: undefined // For displaying username or default value
+        userId: undefined,
+        username: undefined, // For defaults to 'Everyone'
     })
-    const [posts, setPosts] = useState([])
 
-    const { isLogged, isJoined, username } = auth
+    const { isLogged, isJoined, userId, username } = auth
 
+    const handleJoin = (bool) => {
+        setAuth((prevState) => ({ ...prevState, isJoined: bool }))
+    }
+    
     const handleLogout = () => {
-        Cookies.remove('isLogged')
-        Cookies.remove('isJoined')
-        Cookies.remove('username')
-        setAuth((prevState) => ({
-            ...prevState, 
-            isLogged: false,
-            isJoined: false,
-            username: undefined
-        }))
+        setAuth({ isLogged: false, isJoined: false, userId: '', username: undefined })
     }
 
     // Effect Hook for Side Effects
     useEffect(() => {
         // componentDidMount() or componentDidUpdate()
-        setPosts(() => [
-            {
-                id: 1,
-                username: 'John',
-                title: 'First Post',
-                body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            },
-            {
-                id: 2,
-                username: 'Jane',
-                title: 'Second Post',
-                body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            },
-            {
-                id: 3,
-                username: 'John',
-                title: 'Third Post',
-                body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            },
-        ])
-
-        // console.log(Cookies.get()) // <<<<<<<<<
-        if (Cookies.get('isLogged') && Cookies.get('isJoined') && Cookies.get('username')) {
-            // console.log(Cookies.get('isLogged')) // <<<<<<<<<
-            // console.log(Cookies.get('isJoined')) // <<<<<<<<<
-            // console.log(Cookies.get('username')) // <<<<<<<<<
-            setAuth((prevState) => ({
-                ...prevState,
-                isLogged: Cookies.get('isLogged') === 'true' ? true : false,
-                isJoined: Cookies.get('isJoined') === 'true' ? true : false,
-                username: Cookies.get('username')
-            }))
+        const fetchAuth = async () => {
+            const res = await axios.get(`/api/auth/info`)
+            if (res.data.auth) {
+                setAuth((prevState) => ({
+                    ...prevState,
+                    isLogged: true,
+                    isJoined: res.data.auth.isJoined,
+                    userId: res.data.auth.userId,
+                    username: res.data.auth.username
+                }))
+            }
         }
+        fetchAuth()
         
         // componentWillUnmount()
-        // return function () {
-        //
-        // }
+        return () => {
+            setAuth({ isLogged: false, isJoined: false, userId: '', username: undefined })
+        }
+
         // setting up subscription
     }, [])
 
@@ -88,16 +64,26 @@ const App = () => {
             <Router>
                 <NavBar isLogged={isLogged} handleLogout={handleLogout}/>
                 <Routes>
-                    <Route path='/' element={<Home username={username} />} />
-                    <Route path='/about' element={<About />} />
-                    <Route path='/board' element={<Board isLogged={isLogged} posts={posts} />} />
-                    <Route path='/postview/:postId' element={<PostView username={username} />} />
-                    <Route path='/postwrite' element={<PostWrite isLogged={isLogged} username={username} />} />
-                    <Route path='/postmodify/:postId' element={<PostModify isLogged={isLogged} username={username} />} />
-                    <Route path='/clinics' element={<Clinics />} />
-                    <Route path='/survey' element={<Survey isLogged={isLogged} isJoined={isJoined} />} />
-                    <Route path='/articles' element={<Articles />} />
-                    <Route path='/login' element={<Login isLogged={isLogged} isJoined={isJoined} />} />
+                    <Route path='/' 
+                        element={<Home username={username} />} />
+                    <Route path='/about' 
+                        element={<About />} />
+                    <Route path='/board' 
+                        element={<Board isLogged={isLogged} />} />
+                    <Route path='/postwrite' 
+                        element={<PostWrite isLogged={isLogged} userId={userId} username={username} />} />
+                    <Route path='/postview/:postId' 
+                        element={<PostView userId={userId} />} />
+                    <Route path='/postmodify/:postId' 
+                        element={<PostModify isLogged={isLogged} userId={userId} username={username} />} />
+                    <Route path='/clinics' 
+                        element={<Clinics />} />
+                    <Route path='/survey' 
+                        element={<Survey isLogged={isLogged} isJoined={isJoined} userId={userId} username={username} handleJoin={handleJoin} />} />
+                    <Route path='/articles' 
+                        element={<Articles />} />
+                    <Route path='/login' 
+                        element={<Login isLogged={isLogged} />} />
                 </Routes>
             </Router>
         </>

@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const KakaoStrategy = require('passport-kakao').Strategy
 const { User } = require('../models')
+const hostConfig = require('./hostConfig')[process.env.NODE_ENV]
 
 
 module.exports = asyncHandler(async (passport) => {
@@ -8,7 +9,7 @@ module.exports = asyncHandler(async (passport) => {
         new KakaoStrategy({
             clientID: process.env.KAKAO_OAUTH_CLIENT_ID,
             clientSecret: process.env.KAKAO_OAUTH_CLIENT_SECRET,
-            callbackURL: "/api/auth/kakao/callback"
+            callbackURL: `${hostConfig.server}/api/auth/kakao/callback`
         },
         async (accessToken, refreshToken, profile, cb) => {
             // console.log(profile) // <<<<<<<<<

@@ -1,7 +1,6 @@
 const express = require('express')
 const passport = require('passport')
 const asyncHandler = require('express-async-handler')
-const { ensureGuest, ensureAuth } = require('../middleware/authenticator')
 
 const router = express.Router()
 
@@ -11,10 +10,7 @@ const router = express.Router()
  * @route /api/auth/kakao
  * @access public
  */
-router.get('/kakao', 
-    ensureGuest, 
-    passport.authenticate('kakao', { failureRedirect: '/login' })
-)
+router.get('/kakao', passport.authenticate('kakao', { failureRedirect: '/login' }))
 
 /**
  * @description allback from Kakao
@@ -22,22 +18,16 @@ router.get('/kakao',
  * @route /api/auth/kakao/callback
  * @access public
  */
-router.get('/kakao/callback', 
-    ensureGuest, 
-    passport.authenticate('kakao', { failureRedirect: '/login' }),
+router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: '/login' }),
     asyncHandler(async (req, res) => {
         // Check authentication
         // console.log(req.session) // <<<<<<<<<
-        // console.log(req.user.id) // <<<<<<<<<
         // console.log(req.user.isJoined) // <<<<<<<<<
+        // console.log(req.user.id) // <<<<<<<<<
         // console.log(req.user.username) // <<<<<<<<<
 
-        // Set cookie and redirect
-        res.status(200)
-            .cookie('isLogged', true)
-            .cookie('isJoined', req.user.isJoined)
-            .cookie('username', req.user.username)
-            .redirect('/survey')
+        // Set status and redirect
+        res.status(200).redirect('/survey')
     })
 )
 
@@ -47,10 +37,7 @@ router.get('/kakao/callback',
  * @route /api/auth/google
  * @access public
  */
-router.get('/google', 
-    ensureGuest, 
-    passport.authenticate('google', { scope: ['profile'] })
-)
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
 /**
  * @description Callback from Google
@@ -58,22 +45,36 @@ router.get('/google',
  * @route /api/auth/google/callback
  * @access public
  */
-router.get('/google/callback', 
-    ensureGuest, 
-    passport.authenticate('google', { failureRedirect: '/login' }),
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
     asyncHandler(async (req, res) => {
-        // Check in authentication
+        // Check authentication
         // console.log(req.session) // <<<<<<<<<
-        // console.log(req.user.id) // <<<<<<<<<
         // console.log(req.user.isJoined) // <<<<<<<<<
+        // console.log(req.user.id) // <<<<<<<<<
         // console.log(req.user.username) // <<<<<<<<<
 
-        // Set cookie and redirect
-        res.status(200)
-            .cookie('isLogged', true)
-            .cookie('isJoined', req.user.isJoined)
-            .cookie('username', req.user.username)
-            .redirect('/survey')
+        // Set status and redirect
+        res.status(200).redirect('/survey')
+    })
+)
+
+/**
+ * @description Fetch auth info
+ * @method GET
+ * @route /api/auth/info
+ * @access private
+ */
+router.get('/info',
+    asyncHandler(async (req, res) => {
+        res.status(200).json({
+            message: 'OK',
+            auth: {
+                isJoined: req.user.isJoined,
+                userId: req.user.id,
+                username: req.user.username
+            }
+        })
+        
     })
 )
 
@@ -84,7 +85,6 @@ router.get('/google/callback',
  * @access private
  */
 router.get('/logout',
-    ensureAuth, // >>>>>> !!! <<<<<<
     asyncHandler(async (req, res) => {
         // Session destroy
         req.session.destroy()
@@ -92,16 +92,12 @@ router.get('/logout',
         // Empty req.user
         req.user = null
         
-        // Clear cookie
-        res.clearCookie('user')
-
         // Check logout
         // console.log(req.session) // <<<<<<<<<
         // console.log(req.user) // <<<<<<<<<
-        // console.log(res.cookies) // <<<<<<<<<
 
         // Redirect
-        res.redirect('/')
+        res.status(200).json({ message: 'OK' })
     })
 )
 

@@ -4,12 +4,12 @@ import kakaoLogo from "../assets/kakaoLogo.png"
 
 
 const Login = ({ isLogged }) => {
-
     const kakaoLogin = () => window.location.href = '/api/auth/kakao'
     const googleLogin = () => window.location.href = '/api/auth/google'
 
     return (
-        isLogged ?
+        isLogged 
+            ?
             <div className='subTitle'>You have logged in.</div>
             :
             <div className="login">
