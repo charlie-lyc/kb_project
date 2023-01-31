@@ -1,5 +1,5 @@
 .mainTitle {
-    background-color: #033F0F;
+    background-color: #1b452e;
     color: #ffffff;
     margin: auto;
     height: 7rem;
@@ -10,6 +10,11 @@
     /* vertical-align: middle; */
 }
 
+.mainLogo{
+    width: 30%;
+    margin: auto;
+}
+
 /**************************************/
 @media screen and (max-width: 820px){
     .mainTitle{
@@ -18,7 +23,15 @@
     }
     body{
         width: 100%;
-        
+    }
+    .mainLogo{
+        width: 37%;
+    }
+}
+
+@media screen and (min-width: 821px) and (max-width: 1200px){
+    .mainLogo{
+        width: 35%;
     }
 }
 /**************************************/

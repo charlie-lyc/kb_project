@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #033F0F;
+    background-color: #08422c;
     height: 3.5rem;
     font-size: 1.3rem;
 }
@@ -62,7 +62,7 @@
 /**************************************/
 
 .dropdown {
-    background-color: #69896f;
+    background-color: #879b8b;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
 }
