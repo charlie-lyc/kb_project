@@ -39,7 +39,7 @@ const PostView = ({ userId }) => {
     // console.log(userId, currentPost.UserId) // <<<<<<<<<
     if (!currentPost.id) {
         return (
-            <div className='subTitle'>Not Found</div>
+            <div className='subTitle'>Not Found<br />존재하지 않는 글입니다.</div>
         )
     }
 
@@ -47,17 +47,17 @@ const PostView = ({ userId }) => {
         <>
             <div className='postViewForm'>
                 <h3 className='subTitle'>{currentPost.title}</h3>
-                <p className='postUsername'>{currentPost.username}</p>
+                <p className='postUsername'>{currentPost.username.substring(0, currentPost.username.length / 2) + '***'}</p>
                 <p className='postBody'>{currentPost.body}</p>
                 <br /><br />
-                <button><Link to='/board'>Back</Link></button>
+                <button><Link to='/board'>Back 뒤로가기</Link></button>
                 &nbsp;
                 {
                     userId === currentPost.UserId &&
                     <>
-                        <Link to={`/postmodify/${currentPost.id}`}><button style={{ color: 'blue' }}>Modify</button></Link>
+                        <Link to={`/postmodify/${currentPost.id}`}><button style={{ color: 'blue' }}>Modify 수정</button></Link>
                         &nbsp;
-                        <button style={{ color: 'red' }} onClick={handleDelete}>Delete</button>
+                        <button style={{ color: 'red' }} onClick={handleDelete}>Delete 삭제</button>
                     </>
                 }
             </div>

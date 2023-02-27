@@ -26,30 +26,30 @@ const NavBar = ({ isLogged, handleLogout }) => {
             <hr />
             <section className='navBar'>
                 <span>
-                    <Link to='/'>Home</Link>
+                    <Link to='/'>Home 홈</Link>
                 </span>
                 <ul>
                     <li>
-                        <Link to='/about'>About</Link>
+                        <Link to='/about'>About 소개</Link>
                     </li>
                     <li>
-                        <Link to='/board'>Board</Link>
+                        <Link to='/board'>Board 소통</Link>
                     </li>
                     <li>
-                        <Link to='/clinics'>Clinics</Link>
+                        <Link to='/clinics'>Clinics 클리닉</Link>
                     </li>
                     <li>
-                        <Link to='/survey'>Survey</Link>
+                        <Link to='/survey'>Survey 설문</Link>
                     </li>
                     <li>
-                        <Link to='/articles'>Articles</Link>
+                        <Link to='/articles'>Articles 관련 기사</Link>
                     </li>
                     {
                         isLogged
                             ?
-                            <li onClick={executeLogout}><span>Logout</span></li>
+                            <li onClick={executeLogout}><span>Logout 로그아웃</span></li>
                             :
-                            <li><Link to='/login'>Login</Link></li>
+                            <li><Link to='/login'>Login 로그인</Link></li>
                     }
                 </ul>
                 <span className='hamburgerMenu' onClick={toggleDropdown}>
@@ -61,26 +61,26 @@ const NavBar = ({ isLogged, handleLogout }) => {
                 <div className="dropdown" onClick={toggleDropdown}>
                     <ul className='dropdownMenu'>
                         <li>
-                            <Link to='/about'>About</Link>
+                            <Link to='/about'>About 소개</Link>
                         </li>
                         <li>
-                            <Link to='/board'>Board</Link>
+                            <Link to='/board'>Board 소통</Link>
                         </li>
                         <li>
-                            <Link to='/clinics'>Clinics</Link>
+                            <Link to='/clinics'>Clinics 클리닉</Link>
                         </li>
                         <li>
-                            <Link to='/survey'>Survey</Link>
+                            <Link to='/survey'>Survey 설문</Link>
                         </li>
                         <li>
-                            <Link to='/articles'>Articles</Link>
+                            <Link to='/articles'>Articles 관련 기사</Link>
                         </li>
                         {
                             isLogged
                                 ?
-                                <li onClick={executeLogout}><span>Logout</span></li>
+                                <li onClick={executeLogout}><span>Logout 로그아웃</span></li>
                                 :
-                                <li><Link to='/login'>Login</Link></li>
+                                <li><Link to='/login'>Login 로그인</Link></li>
                         }
                     </ul>
                     {/* <a>&times;</a> */}

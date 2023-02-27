@@ -5,7 +5,7 @@ const Articles = () => {
     
     return (
         <div className="articles">
-            <div className="subTitle">Article Used/Helpful Articles </div>
+            <div className="subTitle">Article Used/Helpful Articles</div>
             <div className="articleList">
                 <a
                     className="articleListItem"
@@ -158,7 +158,7 @@ const Articles = () => {
                     frustrated. It also included that speech and language
                     therapists said that post effect of COVID19 is likely to be
                     a causing factor of this disorder, which is usually caused
-                    by brain injury or neurodegeneration.
+                    by brain injury or neuro degeneration.
                 </p>
 
                 <br />

@@ -53,28 +53,29 @@ const PostModify = ({ isLogged, userId }) => {
 
     if (!isLogged) {
         return (
-            <div className='subTitle'>You need to login.</div>
+            <div className='subTitle'>You need to login.<br />로그인이 필요합니다.</div>
         )
     }
 
     return (
-        userId !== currentPost.UserId ?
-            <div className='subTitle'>This is not the post you wrote.</div>
+        userId !== currentPost.UserId
+            ?
+            <div className='subTitle'>This is not the post you wrote.<br />이 포스트의 작성자가 아닙니다.</div>
             :
             <>
-                <div className='subTitle'>Modify Post</div>
+                <div className='subTitle'>Modify Post 글 수정</div>
                 <form className='postWriteForm'>
-                    <label>Title</label><br /><br />
+                    <label>Title 제목</label><br /><br />
                     <input type="text" name="title" value={currentPost.title} onChange={handleChange} />
                     <br /><br />
-                    <label>User Name : </label>{currentPost.username}
+                    <label>User Name 작성자: </label>{currentPost.username}
                     <br /><br />
-                    <label>Body</label><br /><br />
+                    <label>Body 본문</label><br /><br />
                     <textarea rows="20" name="body" value={currentPost.body} onChange={handleChange}></textarea>
                     <br /><br />
-                    <Link to={`/postview/${postId}`}><button>Cancel</button></Link>
+                    <Link to={`/postview/${postId}`}><button>Cancel 취소</button></Link>
                     &nbsp;
-                    <button style={{ color: 'blue' }} onClick={handleModify}>Submit</button>
+                    <button style={{ color: 'blue' }} onClick={handleModify}>Submit 확인</button>
                 </form>
             </>
     )
