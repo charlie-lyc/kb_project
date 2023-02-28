@@ -68,7 +68,7 @@ const PostModify = ({ isLogged, userId }) => {
                     <label>Title 제목</label><br /><br />
                     <input type="text" name="title" value={currentPost.title} onChange={handleChange} />
                     <br /><br />
-                    <label>User Name 작성자: </label>{currentPost.username}
+                    <label>User Name 작성자: </label>{currentPost.username.substring(0, currentPost.username.length / 2) + '***'}
                     <br /><br />
                     <label>Body 본문</label><br /><br />
                     <textarea rows="20" name="body" value={currentPost.body} onChange={handleChange}></textarea>

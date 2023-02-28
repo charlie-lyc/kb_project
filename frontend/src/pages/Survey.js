@@ -579,6 +579,7 @@ const Survey = ({ isLogged, isJoined, userId, username, handleJoin }) => {
                             <div style={{ fontSize: "1.2rem" }}>Long COVID Symptoms 코로나 후유증 증상</div>
                             <span style={{ color: "red" }}>
                                 **Please select ALL the closest symptoms that you are experiencing**
+                                <br />
                                 **해당되는 증상들을 모두 선택해주세요**
                             </span>
                             <br /><br />
@@ -657,19 +658,19 @@ const Survey = ({ isLogged, isJoined, userId, username, handleJoin }) => {
                                 <div onChange={handleOtherSymptomsChange}>
                                     <input type="checkbox" name="lossOfAppetite" /><label> loss of appetite 식욕 부진</label><br />
                                     <input type="checkbox" name="alteredSmell" /><label> altered smell 후각 변화</label><br />
-                                    <input type="checkbox" name="bodyWeightChanges" /><label> bodyWeightChanges 체중 변화</label><br />
+                                    <input type="checkbox" name="bodyWeightChanges" /><label> body weight changes 체중 변화</label><br />
                                     <input type="checkbox" name="myalgiaArthralgia" /><label> myalgia/arthralgia 근육통/관절통</label><br />
-                                    <input type="checkbox" name="alteredTaste" /><label> alteredTaste 미각 변화</label><br />
+                                    <input type="checkbox" name="alteredTaste" /><label> altered taste 미각 변화</label><br />
                                     <input type="checkbox" name="otalgia" /><label> otalgia 귀 통증</label><br />
                                     <input type="checkbox" name="ophthalmologic" /><label> ophthalmologic 눈 질병</label><br />
-                                    <input type="checkbox" name="swollenLymphNodes" /><label> swollenLymphNodes 부은 림프절</label><br />
+                                    <input type="checkbox" name="swollenLymphNodes" /><label> swollen lymph nodes 부은 림프절</label><br />
                                     <input type="checkbox" name="dysphonia" /><label> dysphonia 발성 장애</label><br />
                                     <input type="checkbox" name="fever" /><label> fever 열</label><br />
-                                    <input type="checkbox" name="musculoskeletalOther" /><label> musculoskeletalOther 근골격과 관련된 다른 질환</label><br />
+                                    <input type="checkbox" name="musculoskeletalOther" /><label> musculoskeletal other 근골격과 관련된 다른 질환</label><br />
                                     <input type="checkbox" name="changesInMenstruation" /><label> changes in menstruation 생리 불순</label><br />
-                                    <input type="checkbox" name="urinarySymptoms" /><label> urinarySymptoms 비뇨기 질환</label><br />
-                                    <input type="checkbox" name="dysphagia" /><label> dysphagia 삼킴 곤롼(삼키는데 어려움을 겪는 증상)</label><br />
-                                    <input type="checkbox" name="speechDisturbances" /><label> speechDisturbances 말소리 장애</label><br />
+                                    <input type="checkbox" name="urinarySymptoms" /><label> urinary symptoms 비뇨기 질환</label><br />
+                                    <input type="checkbox" name="dysphagia" /><label> dysphagia 삼킴 곤란(삼키는데 어려움을 겪는 증상)</label><br />
+                                    <input type="checkbox" name="speechDisturbances" /><label> speech disturbances 말소리 장애</label><br />
                                 </div>
                             }
                         </>
