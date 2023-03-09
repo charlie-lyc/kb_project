@@ -27,7 +27,8 @@ router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: 
         // console.log(req.user.username) // <<<<<<<<<
 
         // Set status and redirect
-        res.status(200).redirect('/survey')
+        // res.status(200).redirect('/survey')
+        res.status(200).redirect('/board')
     })
 )
 
@@ -54,7 +55,8 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
         // console.log(req.user.username) // <<<<<<<<<
 
         // Set status and redirect
-        res.status(200).redirect('/survey')
+        // res.status(200).redirect('/survey')
+        res.status(200).redirect('/board')
     })
 )
 
