@@ -5,3 +5,31 @@
 .homeContent {
     margin: 5% 0;
 }
+
+/* Update 23.04.11 */
+
+.imageSize{
+    width: 70%;
+    height:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+}
+
+.source{
+    font-size: 0.8rem;
+    color: #000000e3;
+    margin-bottom: 2rem;
+    text-align: center;
+    
+}
+
+.dataVisImg{
+    width: 50%;
+    height:auto;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+
+}

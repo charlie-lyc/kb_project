@@ -1,15 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.bbcf268e.css",
-    "main.js": "/static/js/main.aa7264d1.js",
+    "main.css": "/static/css/main.ca912015.css",
+    "main.js": "/static/js/main.9637ad47.js",
+    "static/media/FDACovid.png": "/static/media/FDACovid.5810c673f1cb1a3e1291.png",
+    "static/media/longCOVID.jpg": "/static/media/longCOVID.f30ba328c70b99cb2e05.jpg",
+    "static/media/DV6.png": "/static/media/DV6.ca1a83cbae1d0b71da87.png",
+    "static/media/DV1.png": "/static/media/DV1.129e5abbb76eb431d9b4.png",
+    "static/media/DV7.png": "/static/media/DV7.d8dd2bfcffe950fd96ab.png",
+    "static/media/DV3.png": "/static/media/DV3.a00f70f82dd3cb286ff8.png",
+    "static/media/DV2.png": "/static/media/DV2.7e48d4e3e855d257126e.png",
+    "static/media/DV5.png": "/static/media/DV5.eebf26dc83fade7fe42b.png",
+    "static/media/DV4.png": "/static/media/DV4.b9205c6c4305e8b8213c.png",
+    "static/media/DV8.png": "/static/media/DV8.bf78be00f64cb40aeef0.png",
     "static/media/kakaoLogo.png": "/static/media/kakaoLogo.0ed971e9ba8e7953519b.png",
     "static/media/mainTitle.png": "/static/media/mainTitle.594921a74efce565ea5a.png",
     "index.html": "/index.html",
-    "main.bbcf268e.css.map": "/static/css/main.bbcf268e.css.map",
-    "main.aa7264d1.js.map": "/static/js/main.aa7264d1.js.map"
+    "main.ca912015.css.map": "/static/css/main.ca912015.css.map",
+    "main.9637ad47.js.map": "/static/js/main.9637ad47.js.map"
   },
   "entrypoints": [
-    "static/css/main.bbcf268e.css",
-    "static/js/main.aa7264d1.js"
+    "static/css/main.ca912015.css",
+    "static/js/main.9637ad47.js"
   ]
 }
