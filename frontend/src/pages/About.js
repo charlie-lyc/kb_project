@@ -32,15 +32,15 @@ const About = () => {
                 </p>
                 
                 <br />
+                <br />
                 <div className="subTitle">Related Videos</div>
+                <br />
                 <div className="videos">
                     <ReactPlayer url="https://www.youtube.com/watch?v=fF8xdaSzSMg" />
                     <ReactPlayer url="https://www.youtube.com/watch?v=7ZF6XS2cpiw" />
-                    <br />
                 </div>
                 <div className="videos">
                     <ReactPlayer url="https://www.youtube.com/watch?v=0w5XoN7GH-o" />
-                    <br />
                     <ReactPlayer url="https://www.youtube.com/watch?v=5YDMTfesQWM" />
                 </div>
                 {/* Update 23.04.11 */}
