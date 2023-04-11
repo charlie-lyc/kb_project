@@ -5,16 +5,20 @@ const Articles = () => {
     
     return (
         <div className="articles">
-            <div className="subTitle">Article Used/Helpful Articles</div>
+            <div className="subTitle">
+                Article Used/Helpful Articles
+                <br /> 관련 글/리서치에 사용된 글
+            </div>
             <div className="articleList">
-                <a
-                    className="articleListItem"
-                    href="https://www.nature.com/articles/d41586-022-00334-w"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="https://www.nature.com/articles/d41586-022-00334-w" target="_blank" rel="noreferrer">
                     <b>[Nature] Long COVID and kids: more research is urgently needed</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # LONG COVID RESEARCH</b>
+                </p>
+                <br />
                 <p>
                     The article "Long COVID and kids: more research is urgently
                     needed" in nature, the author further research of children’s
@@ -35,14 +39,15 @@ const Articles = () => {
                 <hr className="articleHr" />
                 <br />
 
-                <a
-                    className="articleListItem"
-                    href="https://www.frontiersin.org/articles/10.3389/fpsyt.2022.917552/full"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="https://www.frontiersin.org/articles/10.3389/fpsyt.2022.917552/full" target="_blank" rel="noreferrer">
                     <b>[Frontiers] Depression and anxiety among children and adolescents pre and post COVID-19: A comparative meta-analysis</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # LONG COVID SYMPTOM (PSYCHOLOGICAL)</b>
+                </p>
+                <br />
                 <p>
                     In the article “depression and anxiety among children and
                     adolescents pre and post COVID-19: A comparative
@@ -64,14 +69,14 @@ const Articles = () => {
                 <hr className="articleHr" />
                 <br />
 
-                <a
-                    className="articleListItem"
-                    href="https://khn.org/news/article/they-tested-negative-for-covid-still-they-have-long-covid-symptoms/"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="https://khn.org/news/article/they-tested-negative-for-covid-still-they-have-long-covid-symptoms/" target="_blank" rel="noreferrer">
                     <b>[Kaiser Health News] They Tested Negative for Covid. Still, They Have Long Covid Symptoms. Kaiser Health News</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # TEST RESULTS AND LONG COVID</b>
+                </p>
                 <p>
                     In the article "They Tested Negative for Covid. Still, They
                     Have Long Covid Symptoms" in Kaiser Health News emphasizes
@@ -88,14 +93,15 @@ const Articles = () => {
                 <hr className="articleHr" />
                 <br />
 
-                <a
-                    className="articleListItem"
-                    href="http://www.doctorstimes.com/news/articleView.html?idxno=219410"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="http://www.doctorstimes.com/news/articleView.html?idxno=219410" target="_blank" rel="noreferrer">
                     <b>[의사신문] '우후죽순'으로 생긴 코로나 후유증 클리닉들···“환자 없어 고민"</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # LONG COVID CLINICS</b>
+                </p>
+                <br />
                 <p>
                     The article “우후죽순'으로 생긴 코로나 후유증
                     클리닉들···“환자 없어 고민” in Korean news agency 의사신문
@@ -111,14 +117,15 @@ const Articles = () => {
                 <hr className="articleHr" />
                 <br />
 
-                <a
-                    className="articleListItem"
-                    href="https://www.aamc.org/news-insights/scary-and-confusing-when-kids-suffer-long-covid-19"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="https://www.aamc.org/news-insights/scary-and-confusing-when-kids-suffer-long-covid-19" target="_blank" rel="noreferrer">
                     <b>[AAMC] 'Scary and confusing': When kids suffer from long COVID-19</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # LONG COVID SYMPTOMS</b>
+                </p>
+                <br />
                 <p>
                     The article ‘‘Scary and confusing’: When kids suffer from
                     long COVID-19’ in AAMC shares the personal experiences of
@@ -137,14 +144,15 @@ const Articles = () => {
                 <hr className="articleHr" />
                 <br />
 
-                <a
-                    className="articleListItem"
-                    href="https://www.cambridgeblog.org/2022/04/long-covid-the-impact-on-language-and-communication/"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="https://www.cambridgeblog.org/2022/04/long-covid-the-impact-on-language-and-communication/" target="_blank" rel="noreferrer">
                     <b>[FifteenEightyFour: Cambridge University Press] Long COVID: The impact on language and communication</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # LONG COVID SYMPTOMS(NEUROPSYCHIATRIC)</b>
+                </p>
+                <br />
                 <p>
                     The article “Long COVID: The impact on language and
                     communication” in FifteenEightyFour: Cambridge University
@@ -165,14 +173,15 @@ const Articles = () => {
                 <hr className="articleHr" />
                 <br />
 
-                <a
-                    className="articleListItem"
-                    href="https://medicine.yale.edu/news-article/in-search-of-answers-about-long-covid-19-scientists-turn-to-social-media/"
-                    target="_blank" rel="noreferrer"
-                >
+                <a className="articleListItem" href="https://medicine.yale.edu/news-article/in-search-of-answers-about-long-covid-19-scientists-turn-to-social-media/" target="_blank" rel="noreferrer">
                     <b>[Yale School of Medicine] In search of answers about long COVID-19, scientists turn to social media</b>
                 </a>
-                <br /><br />
+                <br />
+                <br />
+                <p>
+                    <b> # LONG COVID RESEARCH</b>
+                </p>
+                <br />
                 <p>
                     The article “In search of answers about long COVID-19,
                     scientists turn to social media” in Yale School of Medicine

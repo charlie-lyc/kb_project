@@ -16,7 +16,7 @@ const Home = ({ username }) => {
         <div className='home'>
 
             <div className='subTitle'>Welcome, {username}!</div>
-            
+
             <div className='homeContent'>
                 <br />
                 <div className="subTitle">Purpose of This Website</div>
@@ -54,6 +54,7 @@ const Home = ({ username }) => {
                 </p>
 
                 {/* Update 23.04.11 */}
+                <br />
                 <br />
                 <br />
                 <div className="subTitle">
